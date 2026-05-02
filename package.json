@@ -1,0 +1,122 @@
+{
+  "name": "@odude/odude-sdk",
+  "version": "1.0.17",
+  "description": "Multi-network SDK for ODude Name Service ecosystem - TypeScript ready, tree-shakeable, and compatible with Node.js, browsers, and modern bundlers",
+  "main": "dist/index.cjs",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "browser": {
+    "./dist/index.cjs": "./dist/index.umd.js",
+    "./dist/index.mjs": "./dist/index.browser.mjs"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs",
+      "browser": "./dist/index.browser.mjs"
+    },
+    "./package.json": "./package.json"
+  },
+  "sideEffects": false,
+  "scripts": {
+    "build": "rollup -c",
+    "build:watch": "rollup -c --watch",
+    "clean": "rimraf dist",
+    "prebuild": "npm run clean",
+    "prepublishOnly": "npm run build",
+    "test": "mocha test/**/*.test.js --timeout 10000",
+    "test:watch": "mocha test/**/*.test.js --watch",
+    "test:ownership": "mocha test/name-ownership.test.js --timeout 30000",
+    "test:connectivity": "mocha test/network-connectivity.test.js --timeout 30000",
+    "test:extended": "mocha test/extended-functions.test.js --timeout 30000",
+    "test:types": "tsc --noEmit",
+    "lint": "eslint src test",
+    "lint:fix": "eslint src test --fix",
+    "verify": "node scripts/verify-setup.js",
+    "example:basic": "node examples/basic-usage.js",
+    "example:resolve": "node examples/resolve-names.js",
+    "example:airdrop": "node examples/check-airdrop.js",
+    "example:tld": "node examples/tld-management.js",
+    "example:names-list": "node examples/get-names-list.js",
+    "example:all-names": "node examples/get-all-names.js",
+    "example:network-info": "node examples/network-info.js"
+  },
+  "keywords": [
+    "odude",
+    "blockchain",
+    "ethereum",
+    "web3",
+    "smart-contracts",
+    "naming-service",
+    "dns",
+    "ens",
+    "domain",
+    "nft",
+    "airdrop",
+    "ethers",
+    "web3-sdk",
+    "multi-network",
+    "filecoin",
+    "bnb",
+    "base-sepolia",
+    "batch-operations",
+    "tld-management",
+    "domain-minting",
+    "event-monitoring",
+    "typescript",
+    "tree-shaking",
+    "esm",
+    "commonjs",
+    "browser",
+    "nodejs",
+    "nextjs"
+  ],
+  "author": "ODude Team",
+  "license": "MIT",
+  "devDependencies": {
+    "@eslint/js": "^9.39.4",
+    "@rollup/plugin-commonjs": "^28.0.6",
+    "@rollup/plugin-json": "^6.1.0",
+    "@rollup/plugin-node-resolve": "^16.0.1",
+    "@rollup/plugin-terser": "^1.0.0",
+    "@rollup/plugin-typescript": "^12.1.4",
+    "@types/node": "^24.6.2",
+    "chai": "^4.3.10",
+    "diff": "^9.0.0",
+    "dotenv": "^17.2.3",
+    "eslint": "^9.39.4",
+    "globals": "^17.5.0",
+    "mocha": "^11.7.5",
+    "rimraf": "^6.0.1",
+    "rollup": "^4.52.4",
+    "rollup-plugin-dts": "^6.2.3",
+    "serialize-javascript": "^7.0.5",
+    "tslib": "^2.8.1",
+    "typescript": "^5.9.3"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/odude/odude-sdk"
+  },
+  "bugs": {
+    "url": "https://github.com/odude/odude-sdk/issues"
+  },
+  "homepage": "https://github.com/odude/odude-sdk#readme",
+  "files": [
+    "dist/",
+    "src/",
+    "abi/",
+    "config/",
+    "localhost-deployment.json",
+    "README.md",
+    "LICENSE",
+    "tsconfig.json"
+  ],
+  "dependencies": {
+    "ethers": "^6.16.0"
+  }
+}

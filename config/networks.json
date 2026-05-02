@@ -1,0 +1,60 @@
+{
+  "networks": {
+    "localhost": {
+      "name": "Localhost",
+      "rpcUrlEnvVar": "LOCALHOST_RPC_URL",
+      "defaultRpcUrl": "http://127.0.0.1:8545",
+      "chainId": 31337,
+      "contracts": {
+        "Registry": "0x5FC8d32690cc91D4c39d9d3abcBD16989F875707",
+        "Resolver": "0xCf7Ed3AccA5a467e9e704C703E8D87F634fB0Fc9",
+        "TLD": "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
+        "RWAirdrop": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853"
+      }
+    },
+    "filecoin": {
+      "name": "Filecoin",
+      "rpcUrlEnvVar": "FILECOIN_RPC_URL",
+      "defaultRpcUrl": "https://api.node.glif.io",
+      "chainId": 314,
+      "contracts": {
+        "Registry": "0x0000000000000000000000000000000000000000",
+        "Resolver": "0x0000000000000000000000000000000000000000",
+        "TLD": "0x0000000000000000000000000000000000000000",
+        "RWAirdrop": "0x0000000000000000000000000000000000000000"
+      }
+    },
+    "bnb": {
+      "name": "BNB Smart Chain",
+      "rpcUrlEnvVar": "BNB_RPC_URL",
+      "defaultRpcUrl": "https://bsc-dataseed1.binance.org",
+      "chainId": 56,
+      "contracts": {
+        "Registry": "0x0000000000000000000000000000000000000000",
+        "Resolver": "0x0000000000000000000000000000000000000000",
+        "TLD": "0x0000000000000000000000000000000000000000",
+        "RWAirdrop": "0x0000000000000000000000000000000000000000"
+      }
+    },
+    "basesepolia": {
+      "name": "Base Sepolia",
+      "rpcUrlEnvVar": "BASE_SEPOLIA_RPC_URL",
+      "defaultRpcUrl": "https://sepolia.base.org",
+      "chainId": 84532,
+      "contracts": {
+        "Registry": "0x42c8C6ecd33E8927Da30348F5C61FD664Ea069a7",
+        "Resolver": "0x86950D1D45E61C1874D125CBD6aca39F3bD6b936",
+        "TLD": "0x67b7E3fb6515f0a2A1dF22197FAf6a0eDf94621C",
+        "RWAirdrop": "0x35Cc74e7b488060adf4E1946D87d73bdD320de77"
+      }
+    }
+  },
+  "tldMappings": {
+    "fil": "filecoin",
+    "fvm": "filecoin",
+    "bnb": "bnb",
+    "binance": "bnb"
+  },
+  "defaultNetwork": "basesepolia"
+}
+

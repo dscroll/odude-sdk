@@ -1,0 +1,26 @@
+# Test files
+test/
+*.test.js
+
+# Development files
+.eslintrc.json
+.gitignore
+
+# Documentation (keep README.md)
+docs/
+
+# IDE
+.vscode/
+.idea/
+
+# CI/CD
+.github/
+.gitlab-ci.yml
+
+# Environment
+.env
+.env.*
+
+# Logs
+*.log
+
