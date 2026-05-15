@@ -40,7 +40,7 @@ export declare class ODudeSDK {
   getSigner(networkOrTld?: string | null): Signer | null;
   
   connect(addresses: ContractAddresses, network?: string | null): void;
-  connectLocalhost(): void;
+
   connectNetwork(network?: string | null): void;
   connectAllNetworks(): string[];
   connectSigner(signer: Signer, network?: string | null): void;

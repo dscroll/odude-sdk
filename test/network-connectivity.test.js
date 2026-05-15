@@ -39,10 +39,9 @@ describe('Network Connectivity Test', function() {
     // Initialize SDK with environment variables or default RPC URLs
     sdk = new ODudeSDK({
       // Use environment variables if available, otherwise use defaults from config
-      rpcUrl_filecoin: process.env.FILECOIN_RPC_URL,
+      rpcUrl_base: process.env.BASE_RPC_URL,
       rpcUrl_bnb: process.env.BNB_RPC_URL,
-      rpcUrl_sepolia: process.env.BASE_SEPOLIA_RPC_URL,
-      rpcUrl: process.env.LOCALHOST_RPC_URL || 'http://127.0.0.1:8545'
+      rpcUrl_sepolia: process.env.BASE_SEPOLIA_RPC_URL
     });
   });
 

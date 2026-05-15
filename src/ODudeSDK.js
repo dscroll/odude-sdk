@@ -56,7 +56,7 @@ class ODudeSDK {
   /**
    * @param {Object} config - Configuration object
    * @param {string} config.rpcUrl - Single RPC URL (legacy, optional if provider is provided)
-   * @param {string} config.rpcUrl_filecoin - Filecoin RPC URL (optional)
+   * @param {string} config.rpcUrl_base - Base Mainnet RPC URL (optional)
    * @param {string} config.rpcUrl_bnb - BNB Smart Chain RPC URL (optional)
    * @param {string} config.rpcUrl_sepolia - Base Sepolia RPC URL (optional)
    * @param {ethers.Provider} config.provider - Ethers provider (optional)
@@ -99,7 +99,7 @@ class ODudeSDK {
 
     // Check if multi-network RPC URLs are provided correctly
     const networkRpcUrls = {
-      filecoin: this.config.rpcUrl_filecoin,
+      base: this.config.rpcUrl_base,
       bnb: this.config.rpcUrl_bnb,
       sepolia: this.config.rpcUrl_sepolia
     };
@@ -194,7 +194,7 @@ class ODudeSDK {
       if (rpcUrl) {
         try {
           // Skip network detection for external networks to avoid connection issues
-          const skipDetection = !rpcUrl.includes('127.0.0.1') && !rpcUrl.includes('localhost');
+          const skipDetection = !rpcUrl.includes('127.0.0.1');
           this.providers[networkName] = new LimitedRetryJsonRpcProvider(rpcUrl, null, {
             maxRetries: 3,
             skipNetworkDetection: skipDetection,
@@ -211,16 +211,9 @@ class ODudeSDK {
       }
     }
 
-    // Fallback to localhost if no providers were created
+    // Log error if no providers were created
     if (Object.keys(this.providers).length === 0) {
-      try {
-        this.providers.localhost = new LimitedRetryJsonRpcProvider('http://127.0.0.1:8545', null, { maxRetries: 3 });
-        if (this.config.privateKey) {
-          this.signers.localhost = new Wallet(this.config.privateKey, this.providers.localhost);
-        }
-      } catch (error) {
-        console.warn(`Failed to initialize localhost provider: ${error.message}`);
-      }
+      console.error('❌ ODude SDK: Failed to initialize any providers. Please check your configuration.');
     }
   }
 
@@ -250,10 +243,7 @@ class ODudeSDK {
       return this.config.rpcUrl_sepolia;
     }
 
-    // Check for legacy single rpcUrl
-    if (this.config.rpcUrl && networkName === 'localhost') {
-      return this.config.rpcUrl;
-    }
+
 
     // Use default RPC URL
     return networkInfo.defaultRpcUrl;
@@ -382,28 +372,11 @@ class ODudeSDK {
     }
   }
 
-  /**
-   * Connect to localhost deployment
-   * Reads addresses from localhost-deployment.json
-   */
-  connectLocalhost() {
-    try {
-      const deployment = require('../localhost-deployment.json');
-      const addresses = {
-        Registry: deployment.contracts.Registry.address,
-        Resolver: deployment.contracts.Resolver.address,
-        TLD: deployment.contracts.TLD.address,
-        RWAirdrop: deployment.contracts.RWAirdrop.address
-      };
-      this.connect(addresses, 'localhost');
-    } catch (error) {
-      throw new NetworkError('Failed to load localhost-deployment.json: ' + error.message, 'localhost');
-    }
-  }
+
 
   /**
    * Connect to a network using config file
-   * @param {string} network - Network name ('localhost', 'filecoin', 'bnb', 'basesepolia')
+   * @param {string} network - Network name ('base', 'bnb', 'basesepolia')
    */
   connectNetwork(network = null) {
     try {
@@ -421,7 +394,7 @@ class ODudeSDK {
         if (!rpcUrl) {
           throw new NetworkError(`No RPC URL available for network "${targetNetwork}"`, targetNetwork);
         }
-        const skipDetection = !rpcUrl.includes('127.0.0.1') && !rpcUrl.includes('localhost');
+        const skipDetection = !rpcUrl.includes('127.0.0.1');
         this.providers[targetNetwork] = new LimitedRetryJsonRpcProvider(rpcUrl, null, {
           maxRetries: 3,
           skipNetworkDetection: skipDetection,

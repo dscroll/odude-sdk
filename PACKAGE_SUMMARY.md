@@ -93,11 +93,11 @@ The ODude SDK has been successfully transformed into a comprehensive, production
 import ODudeSDK, { ODudeSDKConfig, NameInfo } from '@odude/odude-sdk';
 
 const config: ODudeSDKConfig = {
-  rpcUrl_sepolia: 'https://sepolia.base.org'
+  rpcUrl_base: 'https://mainnet.base.org'
 };
 
 const sdk = new ODudeSDK(config);
-const nameInfo: NameInfo = await sdk.getNameInfo('alice@crypto');
+const nameInfo: NameInfo = await sdk.getNameInfo('alice@base');
 ```
 
 ### JavaScript (ESM)
@@ -105,7 +105,7 @@ const nameInfo: NameInfo = await sdk.getNameInfo('alice@crypto');
 import ODudeSDK from '@odude/odude-sdk';
 
 const sdk = new ODudeSDK({
-  rpcUrl_sepolia: 'https://sepolia.base.org'
+  rpcUrl_base: 'https://mainnet.base.org'
 });
 ```
 
@@ -114,7 +114,7 @@ const sdk = new ODudeSDK({
 const ODudeSDK = require('@odude/odude-sdk');
 
 const sdk = new ODudeSDK({
-  rpcUrl_sepolia: 'https://sepolia.base.org'
+  rpcUrl_base: 'https://mainnet.base.org'
 });
 ```
 
@@ -123,7 +123,7 @@ const sdk = new ODudeSDK({
 <script src="https://unpkg.com/@odude/odude-sdk/dist/index.umd.js"></script>
 <script>
   const sdk = new ODudeSDK({
-    rpcUrl_sepolia: 'https://sepolia.base.org'
+    rpcUrl_base: 'https://mainnet.base.org'
   });
 </script>
 ```

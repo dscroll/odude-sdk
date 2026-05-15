@@ -185,7 +185,7 @@ describe('Build System and Exports', function() {
     it('should work with configuration', function() {
       const ODudeSDK = require('../src/index');
       const config = {
-        rpcUrl: 'http://localhost:8545',
+        rpcUrl_base: 'https://mainnet.base.org',
         privateKey: '0x' + '1'.repeat(64)
       };
       

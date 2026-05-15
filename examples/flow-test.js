@@ -25,9 +25,9 @@ async function main() {
   });
 
   try {
-    // Connect to Base Sepolia network
+    // Connect to Base Mainnet network
     await sdk.connectAllNetworks();
-    console.log('✓ Connected to Base Sepolia network\n');
+    console.log('✓ Connected to Base Mainnet network\n');
 
     // Step 1: Check if subdomain is registered
     console.log('--- Step 1: Check Subdomain Registration ---');

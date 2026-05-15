@@ -38,7 +38,7 @@ const TEST_CONFIG = {
   TOKEN_ID: 1,
   START_INDEX: 0,
   PAGE_SIZE: 5,
-  TEST_NETWORK: 'basesepolia'
+  TEST_NETWORK: 'base'
 };
 ```
 
@@ -58,8 +58,8 @@ const TEST_CONFIG = {
 ```javascript
 const CONFIG = {
   WALLET_ADDRESS: '0x0000000000000000000000000000000000000000',
-  NETWORK: 'basesepolia',
-  RPC_URL: process.env.BASE_SEPOLIA_RPC_URL || 'https://sepolia.base.org'
+  NETWORK: 'base',
+  RPC_URL: process.env.BASE_RPC_URL || 'https://mainnet.base.org'
 };
 ```
 
@@ -82,10 +82,10 @@ const CONFIG = {
 **Configuration:**
 ```javascript
 const CONFIG = {
-  NETWORK: 'basesepolia',
+  NETWORK: 'base',
   START_INDEX: 0,
   PAGE_SIZE: 10,
-  RPC_URL: process.env.BASE_SEPOLIA_RPC_URL || 'https://sepolia.base.org'
+  RPC_URL: process.env.BASE_RPC_URL || 'https://mainnet.base.org'
 };
 ```
 
@@ -109,11 +109,10 @@ const CONFIG = {
 **Configuration:**
 ```javascript
 const CONFIG = {
+  RPC_URL_BASE: process.env.BASE_RPC_URL || 'https://mainnet.base.org',
   RPC_URL_SEPOLIA: process.env.BASE_SEPOLIA_RPC_URL || 'https://sepolia.base.org',
-  RPC_URL_FILECOIN: process.env.FILECOIN_RPC_URL,
   RPC_URL_BNB: process.env.BNB_RPC_URL,
-  RPC_URL_LOCALHOST: process.env.LOCALHOST_RPC_URL || 'http://127.0.0.1:8545',
-  TEST_TLDS: ['crypto', 'fil', 'fvm', 'bnb', 'binance', 'eth', 'base']
+  TEST_TLDS: ['crypto', 'bnb', 'binance', 'eth', 'base']
 };
 ```
 
@@ -322,11 +321,11 @@ const CONFIG = {
 2. **Update example variables** in each example file with real values
 3. **Run tests** to verify functionality: `npm run test:extended`
 4. **Run examples** to see them in action
-5. **Deploy contracts** to other networks (Filecoin, BNB) for full multi-network support
+5. **Deploy contracts** to other networks (BNB) for full multi-network support
 
 ## Notes
 
-- Only Base Sepolia network currently has deployed contracts
+- Only Base networks currently have deployed contracts
 - All functions work correctly when contracts are deployed
 - Tests and examples handle missing contracts gracefully
 - Configuration variables make it easy to test with different values

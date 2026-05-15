@@ -12,10 +12,10 @@ npm install @odude/odude-sdk
 const ODudeSDK = require('@odude/odude-sdk');
 
 const sdk = new ODudeSDK({
-  rpcUrl_sepolia: 'https://sepolia.base.org'
+  rpcUrl_base: 'https://mainnet.base.org'
 });
 
-sdk.connectNetwork('basesepolia');
+sdk.connectNetwork('base');
 ```
 
 ## Configuration Variables
@@ -32,7 +32,7 @@ const TEST_CONFIG = {
   TOKEN_ID: 1,                  // Token ID to test
   START_INDEX: 0,               // Pagination start
   PAGE_SIZE: 5,                 // Pagination size
-  TEST_NETWORK: 'basesepolia'   // Network to test
+  TEST_NETWORK: 'base'   // Network to test
 };
 ```
 
@@ -42,29 +42,28 @@ const TEST_CONFIG = {
 ```javascript
 const CONFIG = {
   WALLET_ADDRESS: '0x...',
-  NETWORK: 'basesepolia',
-  RPC_URL: process.env.BASE_SEPOLIA_RPC_URL || 'https://sepolia.base.org'
+  NETWORK: 'base',
+  RPC_URL: process.env.BASE_RPC_URL || 'https://mainnet.base.org'
 };
 ```
 
 #### get-all-names.js
 ```javascript
 const CONFIG = {
-  NETWORK: 'basesepolia',
+  NETWORK: 'base',
   START_INDEX: 0,
   PAGE_SIZE: 10,
-  RPC_URL: process.env.BASE_SEPOLIA_RPC_URL || 'https://sepolia.base.org'
+  RPC_URL: process.env.BASE_RPC_URL || 'https://mainnet.base.org'
 };
 ```
 
 #### network-info.js
 ```javascript
 const CONFIG = {
+  RPC_URL_BASE: process.env.BASE_RPC_URL || 'https://mainnet.base.org',
   RPC_URL_SEPOLIA: process.env.BASE_SEPOLIA_RPC_URL || 'https://sepolia.base.org',
-  RPC_URL_FILECOIN: process.env.FILECOIN_RPC_URL,
   RPC_URL_BNB: process.env.BNB_RPC_URL,
-  RPC_URL_LOCALHOST: process.env.LOCALHOST_RPC_URL || 'http://127.0.0.1:8545',
-  TEST_TLDS: ['crypto', 'fil', 'fvm', 'bnb', 'binance', 'eth', 'base']
+  TEST_TLDS: ['crypto', 'bnb', 'binance', 'eth', 'base']
 };
 ```
 
@@ -219,10 +218,10 @@ if (!exists) {
 const networkInfo = sdk.NetworkList();
 
 // Check if network is connected
-const isConnected = networkInfo.supportedNetworks.basesepolia.isConnected;
+const isConnected = networkInfo.supportedNetworks.base.isConnected;
 
 // Check if contracts are deployed
-const hasContracts = networkInfo.supportedNetworks.basesepolia.hasContracts;
+const hasContracts = networkInfo.supportedNetworks.base.hasContracts;
 
 if (isConnected && hasContracts) {
   console.log('Ready to use!');
@@ -235,10 +234,9 @@ if (isConnected && hasContracts) {
 
 ```bash
 # Set these in your .env file or shell
+export BASE_RPC_URL="https://mainnet.base.org"
 export BASE_SEPOLIA_RPC_URL="https://sepolia.base.org"
-export FILECOIN_RPC_URL="https://api.node.glif.io"
 export BNB_RPC_URL="https://bsc-dataseed1.binance.org"
-export LOCALHOST_RPC_URL="http://127.0.0.1:8545"
 ```
 
 ## Error Handling
@@ -258,16 +256,14 @@ try {
 
 ## Network Status
 
+- ✅ **Base Mainnet**: Fully working (default)
 - ✅ **Base Sepolia**: Fully working
-- ⚠️ **Localhost**: Works with local node
-- ⚠️ **Filecoin**: RPC accessible, no contracts
 - ⚠️ **BNB Chain**: RPC accessible, no contracts
 
 ## TLD Mappings
 
-- `@fil`, `@fvm` → Filecoin
 - `@bnb`, `@binance` → BNB Chain
-- All others → Base Sepolia (default)
+- All others → Base Mainnet (default)
 
 ## Important Notes
 
@@ -282,7 +278,7 @@ try {
 | Issue | Solution |
 |-------|----------|
 | Network connection failed | Check RPC URL, use environment variables |
-| Contract not found | Only Base Sepolia has contracts |
+| Contract not found | Only Base networks have contracts |
 | Name not found | Use `nameExists()` to check first |
 | Method not a function | Use `sdk.registry()` not `sdk.registry` |
 

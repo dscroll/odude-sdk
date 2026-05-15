@@ -10,8 +10,7 @@ async function main() {
 
   // Initialize SDK with Base Sepolia (the working network)
   const sdk = new ODudeSDK({
-    rpcUrl_sepolia: process.env.BASE_SEPOLIA_RPC_URL || 'https://sepolia.base.org',
-    rpcUrl: process.env.LOCALHOST_RPC_URL || 'http://127.0.0.1:8545'
+    rpcUrl_sepolia: process.env.BASE_SEPOLIA_RPC_URL || 'https://sepolia.base.org'
   });
 
   try {
@@ -111,8 +110,6 @@ async function main() {
     'crypto',           // TLD name
     'demo@crypto',      // Subdomain on crypto TLD
     'test@bnb',         // Subdomain on bnb TLD (maps to BNB network)
-    'example@filecoin', // Subdomain on filecoin TLD (maps to Filecoin network)
-    'demo@fil',         // Subdomain on fil TLD (also maps to Filecoin network)
     'test@binance'      // Subdomain on binance TLD (maps to BNB network)
   ];
 

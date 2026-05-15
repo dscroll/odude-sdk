@@ -17,10 +17,9 @@ async function main() {
 
   // Initialize SDK with multi-network support
   const sdk = new ODudeSDK({
-    rpcUrl_filecoin: process.env.FILECOIN_RPC_URL,
+    rpcUrl_base: process.env.BASE_RPC_URL,
     rpcUrl_bnb: process.env.BNB_RPC_URL,
-    rpcUrl_sepolia: process.env.BASE_SEPOLIA_RPC_URL || 'https://sepolia.base.org',
-    rpcUrl: process.env.LOCALHOST_RPC_URL || 'http://127.0.0.1:8545'
+    rpcUrl_sepolia: process.env.BASE_SEPOLIA_RPC_URL || 'https://sepolia.base.org'
   });
 
   // Display network information

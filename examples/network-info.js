@@ -25,13 +25,12 @@ const ODudeSDK = require('../src/index');
 // Update these variables to test with your own values
 const CONFIG = {
   // RPC URLs (optional, will use defaults if not provided)
+  RPC_URL_BASE: process.env.BASE_RPC_URL || 'https://mainnet.base.org',
   RPC_URL_SEPOLIA: process.env.BASE_SEPOLIA_RPC_URL || 'https://sepolia.base.org',
-  RPC_URL_FILECOIN: process.env.FILECOIN_RPC_URL,
   RPC_URL_BNB: process.env.BNB_RPC_URL,
-  RPC_URL_LOCALHOST: process.env.LOCALHOST_RPC_URL || 'http://127.0.0.1:8545',
   
   // Test TLDs to check network mapping
-  TEST_TLDS: ['crypto', 'fil', 'fvm', 'bnb', 'binance', 'eth', 'base']
+  TEST_TLDS: ['crypto', 'bnb', 'binance', 'eth', 'base']
 };
 // =======================================================
 
@@ -40,10 +39,9 @@ async function main() {
 
   // Initialize SDK with all network configurations
   const sdk = new ODudeSDK({
+    rpcUrl_base: CONFIG.RPC_URL_BASE,
     rpcUrl_sepolia: CONFIG.RPC_URL_SEPOLIA,
-    rpcUrl_filecoin: CONFIG.RPC_URL_FILECOIN,
-    rpcUrl_bnb: CONFIG.RPC_URL_BNB,
-    rpcUrl: CONFIG.RPC_URL_LOCALHOST
+    rpcUrl_bnb: CONFIG.RPC_URL_BNB
   });
 
   // === Step 1: Display Network List ===
@@ -102,7 +100,7 @@ async function main() {
   // === Step 5: Try Connecting to Networks ===
   console.log('--- Step 5: Try Connecting to Networks ---\n');
   
-  const networksToTest = ['basesepolia', 'filecoin', 'bnb'];
+  const networksToTest = ['base', 'basesepolia', 'bnb'];
   
   for (const networkName of networksToTest) {
     try {
@@ -154,10 +152,9 @@ async function main() {
   console.log('4. How to understand TLD to network mappings');
   console.log('5. How to test connectivity to different networks');
   console.log('\nKey Insights:');
-  console.log('- Only Base Sepolia currently has deployed contracts');
-  console.log('- TLDs like "fil" and "fvm" map to Filecoin network');
+  console.log('- Both Base Mainnet and Base Sepolia have deployed contracts');
   console.log('- TLDs like "bnb" and "binance" map to BNB network');
-  console.log('- Other TLDs default to Base Sepolia network');
+  console.log('- Other TLDs default to Base Mainnet network');
   console.log('\nNext steps:');
   console.log('- Set environment variables for RPC URLs');
   console.log('- Deploy contracts to other networks');

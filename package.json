@@ -1,6 +1,6 @@
 {
   "name": "@odude/odude-sdk",
-  "version": "1.0.17",
+  "version": "1.0.18",
   "description": "Multi-network SDK for ODude Name Service ecosystem - TypeScript ready, tree-shakeable, and compatible with Node.js, browsers, and modern bundlers",
   "main": "dist/index.cjs",
   "module": "dist/index.mjs",
@@ -57,8 +57,8 @@
     "ethers",
     "web3-sdk",
     "multi-network",
-    "filecoin",
     "bnb",
+    "base",
     "base-sepolia",
     "batch-operations",
     "tld-management",
@@ -105,13 +105,12 @@
   "bugs": {
     "url": "https://github.com/dscroll/odude-sdk/issues"
   },
-  "homepage": "https://github.com/dscroll/odude-sdk#readme",
+  "homepage": "https://dscroll.com",
   "files": [
     "dist/",
     "src/",
     "abi/",
     "config/",
-    "localhost-deployment.json",
     "README.md",
     "LICENSE",
     "tsconfig.json"

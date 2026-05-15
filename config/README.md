@@ -6,9 +6,8 @@ This directory contains network configuration files for the ODude SDK.
 
 The `networks.json` file contains contract addresses for different networks:
 
-- **localhost**: Local development network (Hardhat/Ganache)
-- **testnet**: Test network deployment
-- **mainnet**: Production network deployment
+- **testnet**: Test network deployment (Base Sepolia)
+- **mainnet**: Production network deployment (Base Mainnet)
 
 ### Structure
 
@@ -33,9 +32,9 @@ The `networks.json` file contains contract addresses for different networks:
 ```javascript
 const ODudeSDK = require('odude-sdk');
 
-// Connect to localhost
-const sdk = new ODudeSDK();
-sdk.connectNetwork('localhost');
+// Connect to testnet
+const sdkTestnet = new ODudeSDK();
+sdkTestnet.connectNetwork('basesepolia');
 
 // Connect to testnet
 const sdkTestnet = new ODudeSDK();
@@ -59,8 +58,8 @@ The SDK will automatically use the updated addresses when connecting to that net
 
 ### Important Notes
 
-- **localhost** addresses are automatically synced from `localhost-deployment.json` when available
-- **testnet** and **mainnet** addresses must be manually updated after deployment
+- **base** addresses are the primary production settings
+- **basesepolia** and **bnb** addresses must be manually updated after deployment
 - Always verify contract addresses before using them in production
 - Keep this file secure and do not commit sensitive RPC URLs with API keys to public repositories
 

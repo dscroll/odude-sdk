@@ -5,7 +5,7 @@ A comprehensive, developer-friendly npm package for interacting with the ODude s
 ## Features
 
 - 🚀 **Simple and intuitive API** - Easy to use for both beginners and experts
-- 🌐 **Multi-network support** - Base Sepolia, Filecoin, BNB Chain, Localhost
+- 🌐 **Multi-network support** - Base Mainnet, Base Sepolia, BNB Chain
 - 🔄 **Automatic TLD-based network routing** - Smart routing based on domain TLD
 - 📦 **Full TypeScript support** - Complete type definitions and IntelliSense
 - 🔧 **Built on ethers.js v6** - Modern, secure, and well-maintained foundation
@@ -67,7 +67,7 @@ const ODudeSDK = require('@odude/odude-sdk');
 
 // Initialize SDK with multiple network RPC URLs
 const sdk = new ODudeSDK({
-  rpcUrl_filecoin: 'https://api.node.glif.io',
+  rpcUrl_base: 'https://mainnet.base.org',
   rpcUrl_bnb: 'https://bsc-dataseed1.binance.org',
   rpcUrl_sepolia: 'https://sepolia.base.org'
 });
@@ -76,16 +76,15 @@ const sdk = new ODudeSDK({
 sdk.connectAllNetworks();
 
 // The SDK automatically routes based on TLD:
-// - @fil, @fvm domains → Filecoin network
 // - @bnb, @binance domains → BNB Smart Chain
-// - Other domains → Base Sepolia (default)
+// - Other domains → Base Mainnet (default)
 
 // Resolve names automatically routes to correct network
-const address = await sdk.resolve('alice@fil'); // Uses Filecoin network
+const address = await sdk.resolve('alice@base'); // Uses Base network
 const bnbAddress = await sdk.resolve('bob@bnb'); // Uses BNB network
 ```
 
-**Note:** Currently, only Base Sepolia network has deployed contracts and is fully functional.
+**Note:** Currently, Base Mainnet and Base Sepolia networks have deployed contracts and are fully functional. Other networks are under development.
 
 ## TypeScript Usage
 
@@ -103,8 +102,8 @@ import ODudeSDK, {
 
 // Type-safe configuration
 const config: ODudeSDKConfig = {
+  rpcUrl_base: 'https://mainnet.base.org',
   rpcUrl_sepolia: 'https://sepolia.base.org',
-  rpcUrl_filecoin: 'https://api.node.glif.io',
   privateKey: process.env.PRIVATE_KEY
 };
 
@@ -253,7 +252,7 @@ You can also configure RPC URLs using environment variables:
 
 ```bash
 # Set environment variables
-export FILECOIN_RPC_URL="https://your-filecoin-rpc.com"
+export BASE_RPC_URL="https://your-base-rpc.com"
 export BNB_RPC_URL="https://your-bnb-rpc.com"
 export BASE_SEPOLIA_RPC_URL="https://your-base-sepolia-rpc.com"
 ```
@@ -264,23 +263,7 @@ const sdk = new ODudeSDK();
 sdk.connectAllNetworks();
 ```
 
-### Connect to Localhost
 
-```javascript
-const ODudeSDK = require('odude-sdk');
-
-// Initialize SDK with localhost
-const sdk = new ODudeSDK({
-  rpcUrl: 'http://127.0.0.1:8545'
-});
-
-// Connect to deployed contracts
-sdk.connectLocalhost();
-
-// Now you can use all contracts
-const totalSupply = await sdk.registry().totalSupply();
-console.log('Total names registered:', totalSupply.toString());
-```
 
 ### Connect to Specific Network
 
@@ -289,7 +272,7 @@ const ODudeSDK = require('odude-sdk');
 
 // Connect to a specific network
 const sdk = new ODudeSDK();
-sdk.connectNetwork('basesepolia'); // or 'filecoin', 'bnb', 'localhost'
+sdk.connectNetwork('base'); // or 'bnb', 'basesepolia'
 
 // Access contracts for the connected network
 const registry = sdk.registry;
@@ -320,10 +303,9 @@ await tx.wait();
 
 The ODude SDK is designed to work seamlessly across multiple blockchain networks:
 
-- **Base Sepolia** (default): Primary testnet with full contract deployment
-- **Filecoin**: For FIL/FVM ecosystem domains
+- **Base Mainnet** (default): Primary network with full contract deployment
+- **Base Sepolia**: Testnet for development
 - **BNB Chain**: For BNB/Binance ecosystem domains
-- **Localhost**: For local development and testing
 
 ### TLD-Based Routing
 
@@ -331,15 +313,14 @@ The SDK automatically routes operations to the correct network based on the TLD 
 
 ```javascript
 // These automatically route to the correct network
-await sdk.resolve('alice@fil');      // → Filecoin network
-await sdk.resolve('bob@bnb');        // → BNB Chain
-await sdk.resolve('charlie@crypto'); // → Base Sepolia (default)
+await sdk.resolve('alice@base');    // → Base Mainnet
+await sdk.resolve('bob@bnb');      // → BNB Chain
+await sdk.resolve('charlie@xxx');   // → Base Mainnet (default)
 ```
 
 **TLD Mappings:**
-- `@fil`, `@fvm` → Filecoin network
 - `@bnb`, `@binance` → BNB Chain
-- All other TLDs → Base Sepolia (default network)
+- All other TLDs → Base Mainnet (default network)
 
 ### Contract Architecture
 
@@ -358,7 +339,7 @@ ODude uses the `@` symbol for domain separation (not `.`):
 // ✅ Correct format
 'alice@crypto'
 'subdomain@alice@crypto'
-'test@fil'
+'test@base'
 
 // ❌ Incorrect format
 'alice.crypto'
@@ -453,7 +434,7 @@ import type {
 <script src="https://unpkg.com/@odude/odude-sdk/dist/index.umd.js"></script>
 <script>
   const sdk = new ODudeSDK({
-    rpcUrl_sepolia: 'https://sepolia.base.org'
+    rpcUrl_base: 'https://mainnet.base.org'
   });
 </script>
 ```
@@ -598,7 +579,7 @@ const tokenPrice = await sdk.tld().getTokenPrice(tldTokenId);
 
 // Domain Minting Functions
 // Check if domain is eligible for minting
-const eligibility = await sdk.tld().checkMintEligibility('alice@fil');
+const eligibility = await sdk.tld().checkMintEligibility('alice@base');
 console.log('Eligibility:', eligibility);
 // {
 //   eligible: true,
@@ -609,12 +590,12 @@ console.log('Eligibility:', eligibility);
 // }
 
 // Estimate minting cost
-const cost = await sdk.tld().estimateMintCost('alice@fil');
+const cost = await sdk.tld().estimateMintCost('alice@base');
 console.log('Minting cost:', ethers.formatEther(cost), 'ETH');
 
 // Mint domain
 const mintTx = await sdk.tld().mintDomain(
-  'alice@fil',
+  'alice@base',
   '0x...',
   { value: cost }
 );
@@ -1705,7 +1686,7 @@ Main SDK class that provides access to all contracts.
 #### Methods
 
 - `connect(addresses)`: Connect to contracts with custom addresses
-- `connectLocalhost()`: Connect using localhost-deployment.json
+- `connectNetwork(network)`: Connect to a named network ('base', 'bnb', 'basesepolia')
 - `connectSigner(signer)`: Connect a signer for write operations
 
 #### Properties

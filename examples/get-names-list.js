@@ -23,13 +23,13 @@ const ODudeSDK = require('../src/index');
 // Update these variables to test with your own values
 const CONFIG = {
   // Wallet address to check (replace with actual address)
-  WALLET_ADDRESS: '0xDF9dcaDF518670560fFDD62c3675304bDE8B8015',
-  
-  // Network to use (basesepolia, filecoin, bnb, localhost)
-  NETWORK: 'basesepolia',
-  
+  WALLET_ADDRESS: '0xa0ecba8077308dcb4511292f19b66df2b3e035b7',
+
+  // Network to use (base, basesepolia, bnb)
+  NETWORK: 'base',
+
   // RPC URL (optional, will use default if not provided)
-  RPC_URL: process.env.BASE_SEPOLIA_RPC_URL || 'https://sepolia.base.org'
+  RPC_URL: process.env.BASE_RPC_URL || 'https://mainnet.base.org'
 };
 // =======================================================
 
@@ -42,10 +42,9 @@ async function main() {
 
   // Initialize SDK
   const sdk = new ODudeSDK({
-    rpcUrl_sepolia: CONFIG.RPC_URL,
-    rpcUrl_filecoin: process.env.FILECOIN_RPC_URL,
-    rpcUrl_bnb: process.env.BNB_RPC_URL,
-    rpcUrl: process.env.LOCALHOST_RPC_URL || 'http://127.0.0.1:8545'
+    rpcUrl_base: CONFIG.RPC_URL,
+    rpcUrl_sepolia: process.env.BASE_SEPOLIA_RPC_URL,
+    rpcUrl_bnb: process.env.BNB_RPC_URL
   });
 
   // Connect to network
@@ -59,11 +58,11 @@ async function main() {
 
   // === Step 1: Get Total Names ===
   console.log('--- Step 1: Get Total Names ---');
-  
+
   try {
     const totalNames = await sdk.getTotalNames(CONFIG.WALLET_ADDRESS);
     console.log('Total names owned:', totalNames.toString());
-    
+
     if (totalNames === 0n) {
       console.log('\nThis address does not own any names.');
       console.log('Try using a different wallet address that owns some ODude names.');
@@ -78,17 +77,17 @@ async function main() {
 
   // === Step 2: Get Names List ===
   console.log('--- Step 2: Get Names List ---');
-  
+
   try {
     const namesList = await sdk.getNamesList(CONFIG.WALLET_ADDRESS);
-    
+
     console.log(`Found ${namesList.length} name(s):\n`);
-    
+
     if (namesList.length === 0) {
       console.log('No names found for this address.');
       return;
     }
-    
+
     // Display each name
     for (let i = 0; i < namesList.length; i++) {
       const item = namesList[i];
@@ -96,7 +95,7 @@ async function main() {
       console.log(`   Token ID: ${item.tokenId}`);
       console.log();
     }
-    
+
   } catch (error) {
     console.error('❌ Failed to get names list:', error.message);
     return;
@@ -104,31 +103,31 @@ async function main() {
 
   // === Step 3: Get Detailed Information for Each Name ===
   console.log('--- Step 3: Get Detailed Information ---');
-  
+
   try {
     const namesList = await sdk.getNamesList(CONFIG.WALLET_ADDRESS);
-    
+
     for (let i = 0; i < Math.min(namesList.length, 3); i++) {
       const item = namesList[i];
       console.log(`\nDetails for: ${item.name}`);
       console.log('─'.repeat(50));
-      
+
       try {
         const details = await sdk.getNameDetails(item.name);
-        
+
         console.log('Token ID:', details.tokenId);
         console.log('Owner:', details.owner);
         console.log('Exists:', details.exists);
         console.log('Resolved Address:', details.resolvedAddress || 'Not set');
         console.log('Token URI:', details.tokenURI);
-        
+
         if (details.metadata) {
           console.log('Metadata:');
           console.log('  Name:', details.metadata.name || 'N/A');
           console.log('  Description:', details.metadata.description || 'N/A');
           console.log('  Image:', details.metadata.image || 'N/A');
         }
-        
+
         // Check if approved
         try {
           const approved = await sdk.getApproved(details.tokenId);
@@ -138,16 +137,16 @@ async function main() {
         } catch (e) {
           // Ignore approval check errors
         }
-        
+
       } catch (error) {
         console.log('⚠️  Could not get details:', error.message);
       }
     }
-    
+
     if (namesList.length > 3) {
       console.log(`\n(Showing first 3 of ${namesList.length} names)`);
     }
-    
+
   } catch (error) {
     console.error('❌ Failed to get detailed information:', error.message);
   }

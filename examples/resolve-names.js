@@ -16,10 +16,9 @@ async function main() {
 
   // Initialize SDK with multi-network support
   const sdk = new ODudeSDK({
-    rpcUrl_filecoin: process.env.FILECOIN_RPC_URL,
+    rpcUrl_base: process.env.BASE_RPC_URL,
     rpcUrl_bnb: process.env.BNB_RPC_URL,
-    rpcUrl_sepolia: process.env.BASE_SEPOLIA_RPC_URL,
-    rpcUrl: process.env.LOCALHOST_RPC_URL || 'http://127.0.0.1:8545'
+    rpcUrl_sepolia: process.env.BASE_SEPOLIA_RPC_URL
   });
 
   // Connect to all available networks
@@ -28,28 +27,24 @@ async function main() {
     console.log('✓ Connected to networks:', connectedNetworks.join(', '));
   } catch (error) {
     console.log('⚠️  Some networks may not be available:', error.message);
-    // Fallback to localhost
-    sdk.connectNetwork('localhost');
-    console.log('✓ Connected to localhost network');
   }
   console.log();
 
   // Test names across different networks (using @ format)
   const testNames = [
     'crypto',           // TLD on default network
-    'demo@crypto',      // Subdomain on default network
+    'dscroll',      // Subdomain on default network
     'test@crypto',      // Another subdomain on default network
     'test@bnb',         // Subdomain on BNB network
-    'test@filecoin',    // Subdomain on Filecoin network
-    'demo@fil',         // Subdomain on Filecoin network (fil TLD maps to filecoin)
-    'example@binance'   // Subdomain on BNB network (binance TLD maps to bnb)
+    'example@binance',   // Subdomain on BNB network (binance TLD maps to bnb)
+    'test@base'         // Subdomain on Base network
   ];
 
   console.log('--- Forward Resolution (Name → Address) ---');
   for (const name of testNames) {
     try {
       // Determine which network this name should resolve on
-      let targetNetwork = 'basesepolia'; // default
+      let targetNetwork = 'base'; // default
       if (name.includes('@')) {
         const tld = name.split('@')[1];
         targetNetwork = sdk.getNetworkForTLD(tld);
@@ -83,7 +78,7 @@ async function main() {
   }
 
   console.log('\n--- Reverse Resolution (Address → Name) ---');
-  
+
   // Test addresses
   const testAddresses = [
     '0x90F79bf6EB2c4f870365E785982E1f101E93b906', // Default hardhat account
@@ -110,7 +105,7 @@ async function main() {
   }
 
   console.log('\n--- Name Information ---');
-  
+
   // Get comprehensive name info
   for (const name of testNames) {
     try {
@@ -118,7 +113,7 @@ async function main() {
       console.log(`\nName: ${name}`);
       console.log('Info:', JSON.stringify(info, (key, value) =>
         typeof value === 'bigint' ? value.toString() : value
-      , 2));
+        , 2));
     } catch (error) {
       console.log(`Failed to get info for "${name}":`, error.message);
     }

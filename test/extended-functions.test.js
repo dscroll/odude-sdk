@@ -47,8 +47,8 @@ const TEST_CONFIG = {
   START_INDEX: 0,
   PAGE_SIZE: 5,
   
-  // Network to test (basesepolia, filecoin, bnb, localhost)
-  TEST_NETWORK: 'basesepolia'
+  // Network to test (base, basesepolia, bnb)
+  TEST_NETWORK: 'base'
 };
 // ============================================================
 
@@ -74,10 +74,9 @@ describe('Extended Functions Test', function() {
   beforeEach(function() {
     // Initialize SDK with environment variables or default RPC URLs
     sdk = new ODudeSDK({
-      rpcUrl_filecoin: process.env.FILECOIN_RPC_URL,
+      rpcUrl_base: process.env.BASE_RPC_URL,
       rpcUrl_bnb: process.env.BNB_RPC_URL,
-      rpcUrl_sepolia: process.env.BASE_SEPOLIA_RPC_URL || 'https://sepolia.base.org',
-      rpcUrl: process.env.LOCALHOST_RPC_URL || 'http://127.0.0.1:8545'
+      rpcUrl_sepolia: process.env.BASE_SEPOLIA_RPC_URL || 'https://sepolia.base.org'
     });
 
     // Connect to test network

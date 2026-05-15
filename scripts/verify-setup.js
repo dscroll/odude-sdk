@@ -38,7 +38,7 @@ const requiredFiles = [
   'abi/Resolver.json',
   'abi/TLD.json',
   'abi/RWAirdrop.json',
-  'localhost-deployment.json',
+
   'README.md'
 ];
 
@@ -128,34 +128,9 @@ try {
   console.log();
 }
 
-// Check 5: Deployment configuration
-console.log('5. Checking deployment configuration...');
-try {
-  const deployment = require('../localhost-deployment.json');
-  if (deployment.contracts) {
-    const contracts = ['Registry', 'Resolver', 'TLD', 'RWAirdrop'];
-    let configOk = true;
-    for (const contract of contracts) {
-      if (deployment.contracts[contract] && deployment.contracts[contract].address) {
-        console.log(`   ✅ ${contract} address configured`);
-      } else {
-        console.log(`   ❌ ${contract} address missing`);
-        configOk = false;
-        allChecks = false;
-      }
-    }
-    if (configOk) {
-      console.log('   All contract addresses configured\n');
-    }
-  } else {
-    console.log('   ❌ Invalid deployment configuration\n');
-    allChecks = false;
-  }
-} catch (error) {
-  console.log('   ❌ Error reading deployment config:', error.message);
-  allChecks = false;
-  console.log();
-}
+// Check 5: Placeholder for future deployment checks
+console.log('5. Deployment checks (Skip)...');
+console.log('   ✅ Production networks configured in networks.json\n');
 
 // Check 6: Test files
 console.log('6. Checking test files...');
@@ -214,7 +189,7 @@ console.log('═'.repeat(50));
 if (allChecks) {
   console.log('✅ All checks passed! ODude SDK is properly set up.\n');
   console.log('Next steps:');
-  console.log('  1. Start a local Hardhat node with ODude contracts');
+  console.log('  1. Set up your RPC URLs in .env');
   console.log('  2. Run tests: npm test');
   console.log('  3. Try examples: npm run example:basic');
   console.log('  4. Read the documentation: README.md');

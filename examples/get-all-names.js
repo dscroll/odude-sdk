@@ -22,15 +22,15 @@ const ODudeSDK = require('../src/index');
 // ==================== CONFIGURATION ====================
 // Update these variables to test with your own values
 const CONFIG = {
-  // Network to use (basesepolia, filecoin, bnb, localhost)
-  NETWORK: 'basesepolia',
+  // Network to use (base, basesepolia, bnb)
+  NETWORK: 'base',
   
   // Pagination settings
   START_INDEX: 0,
   PAGE_SIZE: 10,
   
   // RPC URL (optional, will use default if not provided)
-  RPC_URL: process.env.BASE_SEPOLIA_RPC_URL || 'https://sepolia.base.org'
+  RPC_URL: process.env.BASE_RPC_URL || 'https://mainnet.base.org'
 };
 // =======================================================
 
@@ -44,10 +44,9 @@ async function main() {
 
   // Initialize SDK
   const sdk = new ODudeSDK({
-    rpcUrl_sepolia: CONFIG.RPC_URL,
-    rpcUrl_filecoin: process.env.FILECOIN_RPC_URL,
-    rpcUrl_bnb: process.env.BNB_RPC_URL,
-    rpcUrl: process.env.LOCALHOST_RPC_URL || 'http://127.0.0.1:8545'
+    rpcUrl_base: CONFIG.RPC_URL,
+    rpcUrl_sepolia: process.env.BASE_SEPOLIA_RPC_URL,
+    rpcUrl_bnb: process.env.BNB_RPC_URL
   });
 
   // Connect to network

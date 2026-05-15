@@ -40,12 +40,12 @@ describe('CommonJS Integration', function() {
   it('should create SDK instance', function() {
     const ODudeSDK = require('../../src/index');
     const sdk = new ODudeSDK({
-      rpcUrl: 'http://localhost:8545'
+      rpcUrl_base: 'https://mainnet.base.org'
     });
     
     expect(sdk).to.be.instanceOf(ODudeSDK);
     expect(sdk.config).to.be.an('object');
-    expect(sdk.config.rpcUrl).to.equal('http://localhost:8545');
+    expect(sdk.config.rpcUrl_base).to.equal('https://mainnet.base.org');
   });
 
   it('should work with destructuring', function() {

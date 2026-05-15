@@ -5,8 +5,8 @@ import { Provider, Signer, Contract, ContractTransactionResponse, BigNumberish }
 export interface ODudeSDKConfig {
   /** Single RPC URL (legacy, optional if provider is provided) */
   rpcUrl?: string;
-  /** Filecoin RPC URL */
-  rpcUrl_filecoin?: string;
+  /** Base Mainnet RPC URL */
+  rpcUrl_base?: string;
   /** BNB Smart Chain RPC URL */
   rpcUrl_bnb?: string;
   /** Base Sepolia RPC URL */

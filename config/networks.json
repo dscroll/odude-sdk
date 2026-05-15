@@ -1,27 +1,16 @@
 {
   "networks": {
-    "localhost": {
-      "name": "Localhost",
-      "rpcUrlEnvVar": "LOCALHOST_RPC_URL",
-      "defaultRpcUrl": "http://127.0.0.1:8545",
-      "chainId": 31337,
+
+    "base": {
+      "name": "Base Mainnet",
+      "rpcUrlEnvVar": "BASE_RPC_URL",
+      "defaultRpcUrl": "https://mainnet.base.org",
+      "chainId": 8453,
       "contracts": {
-        "Registry": "0x5FC8d32690cc91D4c39d9d3abcBD16989F875707",
-        "Resolver": "0xCf7Ed3AccA5a467e9e704C703E8D87F634fB0Fc9",
-        "TLD": "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
-        "RWAirdrop": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853"
-      }
-    },
-    "filecoin": {
-      "name": "Filecoin",
-      "rpcUrlEnvVar": "FILECOIN_RPC_URL",
-      "defaultRpcUrl": "https://api.node.glif.io",
-      "chainId": 314,
-      "contracts": {
-        "Registry": "0x0000000000000000000000000000000000000000",
-        "Resolver": "0x0000000000000000000000000000000000000000",
-        "TLD": "0x0000000000000000000000000000000000000000",
-        "RWAirdrop": "0x0000000000000000000000000000000000000000"
+        "Registry": "0x565342aeD649073817896A8166A98e612B26B89C",
+        "Resolver": "0xf866580c1FED58Dc2B5F759703C1372f40Ba9191",
+        "TLD": "0xFded759e53cD3E7b505fB8A171365bacBBe05d49",
+        "RWAirdrop": "0x2a17801FEf12c18A5C8DDDC516D1310f3e0caa13"
       }
     },
     "bnb": {
@@ -50,11 +39,8 @@
     }
   },
   "tldMappings": {
-    "fil": "filecoin",
-    "fvm": "filecoin",
-    "bnb": "bnb",
+    "test": "basesepolia",
     "binance": "bnb"
   },
-  "defaultNetwork": "basesepolia"
+  "defaultNetwork": "base"
 }
-

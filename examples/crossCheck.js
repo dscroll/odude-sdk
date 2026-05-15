@@ -14,10 +14,10 @@ const ODudeSDK = require('../src/index');
 
 // ==================== CONFIGURATION ====================
 const CONFIG = {
-  NETWORK: 'basesepolia',
+  NETWORK: 'base',
   TLD_NAME: 'xxx',
   WALLET_ADDRESS: '0xDF9dcaDF518670560fFDD62c3675304bDE8B8015',
-  RPC_URL: process.env.BASE_SEPOLIA_RPC_URL || 'https://sepolia.base.org'
+  RPC_URL: process.env.BASE_RPC_URL || 'https://mainnet.base.org'
 };
 // =======================================================
 

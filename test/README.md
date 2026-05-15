@@ -21,7 +21,7 @@ npx mocha test/network-connectivity.test.js --timeout 30000
 ```
 
 **Expected output**:
-- Shows connection status for each network (localhost, filecoin, bnb, basesepolia)
+- Shows connection status for each network (bnb, basesepolia)
 - Displays total supply of names for successfully connected networks
 - Handles network failures gracefully with informative error messages
 
